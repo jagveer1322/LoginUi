@@ -11,17 +11,20 @@ class LoginTableViewController: UITableViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+    }
+   
+    @IBAction func signupButton(_ sender: UIButton) {
         
+        if let signupVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController{
+                    self.navigationController?.pushViewController(signupVC, animated: true)
+                }
+     print("hhhhhh")
     }
-    @IBAction func signUpButton(_ sender: Any) {
-        print("signup button")
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let signupVC = storyboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
-            self.navigationController!.pushViewController(signupVC, animated: true)
-               
-    }
+    
     @IBAction func loginButton(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text{
                 
