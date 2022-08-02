@@ -15,6 +15,13 @@ class LoginTableViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+    @IBAction func signUpButton(_ sender: Any) {
+        print("signup button")
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let signupVC = storyboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
+            self.navigationController!.pushViewController(signupVC, animated: true)
+               
+    }
     @IBAction func loginButton(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text{
                 

@@ -10,6 +10,7 @@
 		FA734DB52897785C0023449F /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA734DB42897785C0023449F /* LoginTableViewController.swift */; };
 		FA734DB828977A880023449F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA734DB728977A880023449F /* String + Extension.swift */; };
 		FA734DBB2897A34A0023449F /* UIAlertController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA734DBA2897A34A0023449F /* UIAlertController + Extension.swift */; };
+		FA9405F82898BBE600E35A4A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9405F72898BBE600E35A4A /* SignUpViewController.swift */; };
 		FAF1BB282894CE1A0073D443 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1BB272894CE1A0073D443 /* AppDelegate.swift */; };
 		FAF1BB2A2894CE1A0073D443 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1BB292894CE1A0073D443 /* SceneDelegate.swift */; };
 		FAF1BB2F2894CE1A0073D443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF1BB2D2894CE1A0073D443 /* Main.storyboard */; };
@@ -38,9 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FA734DB42897785C0023449F /* LoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginTableViewController.swift; path = LoginUI/LoginTableViewController.swift; sourceTree = "<group>"; };
+		FA734DB42897785C0023449F /* LoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
 		FA734DB728977A880023449F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		FA734DBA2897A34A0023449F /* UIAlertController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + Extension.swift"; sourceTree = "<group>"; };
+		FA9405F72898BBE600E35A4A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		FAF1BB242894CE1A0073D443 /* LoginUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF1BB272894CE1A0073D443 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF1BB292894CE1A0073D443 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,22 @@
 			path = extension;
 			sourceTree = "<group>";
 		};
+		FA734DBE2897E75E0023449F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FA734DB42897785C0023449F /* LoginTableViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FA734DC12897E80C0023449F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				FA9405F72898BBE600E35A4A /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		FAF1BB1B2894CE1A0073D443 = {
 			isa = PBXGroup;
 			children = (
@@ -112,10 +130,11 @@
 		FAF1BB262894CE1A0073D443 /* LoginUI */ = {
 			isa = PBXGroup;
 			children = (
+				FA734DBE2897E75E0023449F /* Login */,
 				FA734DB928977A970023449F /* extension */,
+				FA734DC12897E80C0023449F /* SignUp */,
 				FAF1BB272894CE1A0073D443 /* AppDelegate.swift */,
 				FAF1BB292894CE1A0073D443 /* SceneDelegate.swift */,
-				FA734DB42897785C0023449F /* LoginTableViewController.swift */,
 				FAF1BB2D2894CE1A0073D443 /* Main.storyboard */,
 				FAF1BB302894CE1E0073D443 /* Assets.xcassets */,
 				FAF1BB322894CE1E0073D443 /* LaunchScreen.storyboard */,
@@ -272,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9405F82898BBE600E35A4A /* SignUpViewController.swift in Sources */,
 				FAF1BB282894CE1A0073D443 /* AppDelegate.swift in Sources */,
 				FA734DBB2897A34A0023449F /* UIAlertController + Extension.swift in Sources */,
 				FA734DB52897785C0023449F /* LoginTableViewController.swift in Sources */,
