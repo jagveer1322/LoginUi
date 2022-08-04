@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class SignUpViewController: UITableViewController {
     
@@ -20,6 +22,7 @@ class SignUpViewController: UITableViewController {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageProfile.addGestureRecognizer(tapGesture)
+     
     }
     @objc
     func imageTapped(tapGestureRecognizer : UITapGestureRecognizer){
@@ -31,8 +34,20 @@ class SignUpViewController: UITableViewController {
     
     
     @IBAction func signUpButton(_ sender: UIButton) {
-        
-        let imgSystem = UIImage(systemName: "person.crop.circle.badge.plus")
+        let error = validateSignUpFields()
+        if error != nil{
+            openAlert(title: "Alert", message: "Please correct details", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
+    
+        }else {
+            print("create user ")
+            Auth.auth().createUser(withEmail: "", password: "")
+                
+        }
+       
+    }
+    func validateSignUpFields() -> Bool{
+        var allFieldsValid = true
+    let imgSystem = UIImage(systemName: "person.crop.circle.badge.plus")
         if imageProfile.image?.pngData() != imgSystem?.pngData(){
             
             if let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text, let confirmPassword = confirmPasswordTextField.text{
@@ -62,6 +77,7 @@ class SignUpViewController: UITableViewController {
             print("Please select profile picture")
             openAlert(title: "Alert", message: "Please select profile picture", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
         }
+        return allFieldsValid
     }
     
     
