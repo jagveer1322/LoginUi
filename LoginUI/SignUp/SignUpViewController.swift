@@ -22,7 +22,7 @@ class SignUpViewController: UITableViewController {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageProfile.addGestureRecognizer(tapGesture)
-     
+        
     }
     @objc
     func imageTapped(tapGestureRecognizer : UITapGestureRecognizer){
@@ -34,57 +34,49 @@ class SignUpViewController: UITableViewController {
     
     
     @IBAction func signUpButton(_ sender: UIButton) {
-        let error = validateSignUpFields()
-        if error != nil{
-            openAlert(title: "Alert", message: "Please correct details", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
-    
-        }else {
-            print("create user ")
-            Auth.auth().createUser(withEmail: "", password: "")
-                
-        }
-       
-    }
-    func validateSignUpFields() -> Bool{
-        var allFieldsValid = true
-    let imgSystem = UIImage(systemName: "person.crop.circle.badge.plus")
+        let imgSystem = UIImage(systemName: "person.crop.circle.badge.plus")
         if imageProfile.image?.pngData() != imgSystem?.pngData(){
             
             if let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text, let confirmPassword = confirmPasswordTextField.text{
                 if username == ""{
                     openAlert(title: "Alert", message: "Please enter username", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
-                }
-                else if !email.validateEmail(){
+                    
+                }else if !email.validateEmail(){
                     openAlert(title: "Alert", message: "Please enter valid email", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
-                    print("email is not valid")
+                    
                 }else if !password.validatePassword(){
-                    print("Password is not valid")
-                } else
-                if confirmPassword == ""{
-                    print("Please confirm password")
-                }else{
+                    openAlert(title: "Alert", message: "Please enter valid password", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
+                    
+                }else if confirmPassword == ""{
+                    openAlert(title: "Alert", message: "Please enter confirm password", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
+                }else
+                {
                     if password == confirmPassword{
-                        
-                        print("!")
-                    }else{
-                        print("password does not match")
+                        Auth.auth().createUser(withEmail: email, password: password) { authresult, error in
+                            if error != nil{
+                                print("something went wrong")
+                                return}
+                        self.navigationController?.popViewController(animated: true)
+                            }
+    
+                        }else{
+                            openAlert(title: "Alert", message: "Please enter Same password", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
+                        }
                     }
+                }else{
+                    openAlert(title: "Alert", message: "Please check your details", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
                 }
             }else{
-                print("Please check your details")
+                print("Please select profile picture")
+                openAlert(title: "Alert", message: "Please select profile picture", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
             }
-        }else{
-            print("Please select profile picture")
-            openAlert(title: "Alert", message: "Please select profile picture", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
         }
-        return allFieldsValid
+        
+        
+        @IBAction func loginButton(_ sender: Any) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
-    
-    
-    @IBAction func loginButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
     extension SignUpViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
         
         func openGallery(){
@@ -103,4 +95,4 @@ class SignUpViewController: UITableViewController {
             dismiss(animated: true)
         }
     }
-
+    
