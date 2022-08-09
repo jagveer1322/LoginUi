@@ -59,7 +59,7 @@ extension FBLoginVC : LoginButtonDelegate {
                 }
                 else {
 //                    login Success full
-                   let homedasBoard = HomeDashBoardVC()
+                   let homedasBoard = HomeController()
                     self.navigationController?.pushViewController(homedasBoard, animated: true)
                 }
 

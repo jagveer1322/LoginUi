@@ -10,7 +10,7 @@
         <!--Login Table View Controller-->
         <scene sceneID="KBX-yA-Pyd">
             <objects>
-                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="qEj-u0-WPc" customClass="LoginTableViewController" customModule="LoginUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LoginTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qEj-u0-WPc" customClass="LoginTableViewController" customModule="LoginUI" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="mLg-aF-Bva">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,13 +76,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="0Z9-nH-8wu" userLabel="Account">
                                                     <rect key="frame" x="77" y="768.5" width="260.5" height="31"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have account ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndd-SK-s13">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Don't have account ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndd-SK-s13">
                                                             <rect key="frame" x="0.0" y="0.0" width="160.5" height="31"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cej-e5-1FA" userLabel="SignUp">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cej-e5-1FA" userLabel="SignUp">
                                                             <rect key="frame" x="185.5" y="0.0" width="75" height="31"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
@@ -138,6 +138,9 @@
                                                     <rect key="frame" x="125" y="445.5" width="164.5" height="31"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Forget your Password"/>
+                                                    <connections>
+                                                        <action selector="powerButton:" destination="qEj-u0-WPc" eventType="touchUpInside" id="Keq-6R-H2b"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgN-YS-On0">
                                                     <rect key="frame" x="30" y="227.5" width="43" height="21.5"/>
@@ -146,7 +149,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.0" green="0.014469553956671113" blue="0.35131755655573815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="systemMintColor" catalog="System" colorSpace="catalog"/>
                                             <constraints>
                                                 <constraint firstItem="Nnn-pZ-VID" firstAttribute="leading" secondItem="vcY-2D-Jlk" secondAttribute="leading" id="3XK-GL-h8T"/>
                                                 <constraint firstItem="YA8-gU-YR9" firstAttribute="centerX" secondItem="abf-ts-IyL" secondAttribute="centerX" id="4Lk-Re-Lt3"/>
@@ -317,7 +320,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.010529992999782592" green="0.0" blue="0.35131755655573815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="systemMintColor" catalog="System" colorSpace="catalog"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Ygh-n3-wZx" secondAttribute="bottom" constant="29" id="GNG-DA-DKd"/>
                                                 <constraint firstItem="Ygh-n3-wZx" firstAttribute="centerX" secondItem="WfJ-Y3-0LS" secondAttribute="centerX" id="ItH-1X-vUi"/>
