@@ -4,20 +4,34 @@
 //
 //  Created by Macbook on 09/08/22
 
-import CoreText
+import UIKit
 
-enum MenuOption: Int, CustomStringConvertible{
-    case profile
-    case Notifications
+enum MenuOption: Int, CustomStringConvertible {
+    
+    case Profile
+    case Notes
     case Settings
     case SignOut
     
-    var description: String{
-        switch self{
-        case .profile: return "Profile"
-        case .Notifications: return "Notifications"
+    var description: String {
+        switch self {
+        case .Profile: return "Profile"
+        case .Notes: return "Notes"
         case .Settings: return "Settings"
-        case .SignOut: return "SignOut"
+        case .SignOut: return "Sign out"
         }
-}
+    }
+    
+    var image: UIImage {
+        switch self {
+        case .Profile:
+            return UIImage(named: "profile") ?? UIImage()
+        case .Notes:
+            return UIImage(named: "notes") ?? UIImage()
+        case .Settings:
+            return UIImage(named: "settings") ?? UIImage()
+        case .SignOut:
+            return UIImage(named: "sign-out") ?? UIImage()
+        }
+    }
 }

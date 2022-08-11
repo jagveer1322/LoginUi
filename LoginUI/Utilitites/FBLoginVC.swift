@@ -44,22 +44,22 @@ extension FBLoginVC : LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton!, didCompleteWith result: LoginManagerLoginResult!, error: Error!) {
         let token = result?.token?.tokenString
         let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email,name"], tokenString: token, version: nil, httpMethod: .get)
-
+    
         request.start { (connection, result, error) in
             print("\(String(describing: result))")
 
-            guard let curentUser = AccessToken.current else { return }
+//            guard let curentUser = result.token else { return }
 
             let credential = FacebookAuthProvider
-                .credential(withAccessToken: curentUser.tokenString)
+                .credential(withAccessToken: token!)
             Auth.auth().signIn(with: credential) { result, error in
                 if error != nil{
-                    print("error")
+                    print("facebook error" + (error?.localizedDescription)!)
                     return
                 }
                 else {
 //                    login Success full
-                   let homedasBoard = HomeController()
+                   let homedasBoard = ContainerController()
                     self.navigationController?.pushViewController(homedasBoard, animated: true)
                 }
 

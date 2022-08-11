@@ -37,26 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 open url: URL,
                 options: [UIApplication.OpenURLOptionsKey : Any] = [:]
             ) -> Bool {
-                let flag : Bool = false
                 
-                if ApplicationDelegate.shared.application(
+                 ApplicationDelegate.shared.application(
                     app,
                     open: url,
                     sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                     annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-                ){
-                    ApplicationDelegate.shared.application(
-                        app,
-                        open: url,
-                        sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                        annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-                    )
-                    
-                }else{
-                    GIDSignIn.sharedInstance.handle(url)
-                    
-                }
-                return flag
+                )
+                return GIDSignIn.sharedInstance.handle(url)
             }
 
     // MARK: UISceneSession Lifecycle

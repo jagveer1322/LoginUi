@@ -123,8 +123,6 @@
 		FA02D4ED289E032F00DE6B8E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FA734DB42897785C0023449F /* LoginTableViewController.swift */,
-				FA9405F72898BBE600E35A4A /* SignUpViewController.swift */,
 				FA02D53A28A24B2900DE6B8E /* MenuOption.swift */,
 			);
 			path = Model;
@@ -144,11 +142,37 @@
 		FA734DBE2897E75E0023449F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA75AA2328A35088002DB10E /* sideMenu */,
+				FA75AA2228A35072002DB10E /* Note */,
+				FA75AA2128A35035002DB10E /* login */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FA75AA2128A35035002DB10E /* login */ = {
+			isa = PBXGroup;
+			children = (
+				FA734DB42897785C0023449F /* LoginTableViewController.swift */,
+				FA9405F72898BBE600E35A4A /* SignUpViewController.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		FA75AA2228A35072002DB10E /* Note */ = {
+			isa = PBXGroup;
+			children = (
 				FA02D4EE289E051A00DE6B8E /* HomeController.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		FA75AA2328A35088002DB10E /* sideMenu */ = {
+			isa = PBXGroup;
+			children = (
 				FA02D4F0289E056900DE6B8E /* ContainerController.swift */,
 				FA02D4F2289E058800DE6B8E /* MenuController.swift */,
 			);
-			path = Controller;
+			name = sideMenu;
 			sourceTree = "<group>";
 		};
 		FAB1443E289B632800397758 /* View */ = {

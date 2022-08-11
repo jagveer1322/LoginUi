@@ -14,7 +14,6 @@ class MenuOptionCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .cyan
         return imageView
     }()
     
@@ -22,7 +21,7 @@ class MenuOptionCell: UITableViewCell {
         let lable = UILabel()
         lable.textColor = .black
         lable.font = UIFont.systemFont(ofSize: 16)
-        lable.text = "Sample text"
+
         return lable
     }()
     
@@ -31,7 +30,7 @@ class MenuOptionCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = .systemMint
+        backgroundColor = .white
         addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

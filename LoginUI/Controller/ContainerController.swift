@@ -4,10 +4,12 @@
 //
 //  Created by Macbook on 06/08/22.
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
 
 class ContainerController: UIViewController {
     
-    var menuController : UIViewController!
+    var menuController : MenuController!
     var centerController: UIViewController!
     var isExpanded = false
     
@@ -42,6 +44,7 @@ class ContainerController: UIViewController {
         
         if menuController == nil {
             menuController = MenuController()
+            menuController.delegate = self
             view.insertSubview(menuController.view, at: 0)
             addChild(menuController)
             menuController.didMove(toParent: self)
@@ -50,32 +53,65 @@ class ContainerController: UIViewController {
         }
         
     }
-    func showMenuController(shouldExpand: Bool) {
-
+    func showMenuController(shouldExpand: Bool, menuOption: MenuOption?) {
+        
         if shouldExpand {
-
+            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-
+                
                 self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 80
-
+                
             }, completion: nil)
         }
         else {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                self.centerController.view.frame.origin.x = 0
             }, completion: nil)
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                self.centerController.view.frame.origin.x = 0
+            }) { (_) in
+                guard let menuOption = menuOption else { return }
 
+                self.didSelectMenuOption(menuOption: menuOption)
+            }
         }
     }
-
-}
-extension ContainerController : HomeControllerDelegate{
-    func handleMenuToggle() {
-                if !isExpanded {
-                    configureMenuController()
-                }
-                
-                isExpanded = !isExpanded
-                showMenuController(shouldExpand: isExpanded)
-            }
+    
+    func didSelectMenuOption(menuOption: MenuOption) {
+        switch menuOption {
+        case .Profile:
+            print("profile")
+        case .Notes:
+            print("Notes")
+        case .Settings:
+            print("settings")
+        case .SignOut:
+            print("signout")
+            signout()
+        }
     }
+    func signout(){
+        let firebaseAuth = Auth.auth()
+               do {
+                   
+                   try firebaseAuth.signOut()
+                   GIDSignIn.sharedInstance.signOut()
+                   let home = LoginTableViewController()
+                   self.navigationController?.pushViewController(home, animated: true)
+               }
+               catch let signOutError as NSError {
+                   print("Error signing out: %@", signOutError)
+               }
+           }
+}
+
+extension ContainerController: HomeControllerDelegate {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
+        if !isExpanded {
+            configureMenuController()
+        }
+        
+        isExpanded = !isExpanded
+        showMenuController(shouldExpand: isExpanded, menuOption: menuOption)
+    }
+}

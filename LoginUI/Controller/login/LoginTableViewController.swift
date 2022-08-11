@@ -24,10 +24,20 @@ class LoginTableViewController: UITableViewController {
         
     }
     
-    @IBAction func powerButton(_ sender: UIButton) {
-        let homeVC = ContainerController()
-        self.navigationController?.pushViewController(homeVC, animated: true)
+    @IBAction func forgetPassword(_ sender: UIButton) {
+        guard let email = emailTextField.text else{
+                   print("not found")
+                   return
+               }
+               Auth.auth().sendPasswordReset(withEmail: email) { error in
+                   if error == nil {
+                       self.openAlert(title: "Alert", message: "Link was sent.", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in}])
+                   }else{
+                       print("error \(String(describing: error?.localizedDescription))")
+                   }
+               }
     }
+    
     @IBAction func gooleLogin(_ sender: UIButton) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
@@ -49,7 +59,7 @@ class LoginTableViewController: UITableViewController {
                 if error != nil{
                     return
                 }
-                let homeVC = HomeController()
+                let homeVC = ContainerController()
                 self.navigationController?.pushViewController(homeVC, animated: true)
             }
         
