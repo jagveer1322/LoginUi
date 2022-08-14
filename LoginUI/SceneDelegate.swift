@@ -14,22 +14,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
-//        if let windowScene = (scene as? UIWindowScene) {
-//                    let window = UIWindow(windowScene: windowScene)
-//
-//                    if Auth.auth().currentUser == nil {
-//                        window.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginTableViewController")
-//                    } else {
-//                        let homeDashboard = ContainerController()
-//                        let homeNavigationViewController = UINavigationController.init(rootViewController: homeDashboard)
-//                        window.rootViewController = homeNavigationViewController
-//                    }
-//
-//                    self.window = window
-//                    window.makeKeyAndVisible()
-//                }
-//
+        if let windowScene = (scene as? UIWindowScene) {
+                    let window = UIWindow(windowScene: windowScene)
+
+                    if Auth.auth().currentUser == nil {
+                        window.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginTableViewController")
+                    } else {
+                        let homeDashboard = ContainerController()
+                        let homeNavigationViewController = UINavigationController.init(rootViewController: homeDashboard)
+                        window.rootViewController = homeNavigationViewController
+                    }
+
+                    self.window = window
+                    window.makeKeyAndVisible()
+                }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

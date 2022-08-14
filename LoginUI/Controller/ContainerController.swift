@@ -16,7 +16,7 @@ class ContainerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         configureHomeController()
     }
 
@@ -79,6 +79,8 @@ class ContainerController: UIViewController {
     
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
+        case.AppleKeep:
+            print("apple")
         case .Profile:
             print("profile")
         case .Notes:
@@ -91,13 +93,22 @@ class ContainerController: UIViewController {
         }
     }
     func signout(){
+        
         let firebaseAuth = Auth.auth()
                do {
-                   
                    try firebaseAuth.signOut()
                    GIDSignIn.sharedInstance.signOut()
-                   let home = LoginTableViewController()
-                   self.navigationController?.pushViewController(home, animated: true)
+                   let scene = UIApplication.shared.connectedScenes.first
+                   if let sd : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+                       let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                       if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginTableViewController") as? LoginTableViewController{
+                           print("hello")
+                           sd.window!.rootViewController = UINavigationController(rootViewController: loginVC)
+                       }
+                      
+                   }
+
+                   
                }
                catch let signOutError as NSError {
                    print("Error signing out: %@", signOutError)
