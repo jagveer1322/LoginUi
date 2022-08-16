@@ -9,14 +9,15 @@ import UIKit
 
 class NoteDetailViewController: UIViewController {
     
-    let descriptionTextView = UITextView()
+    var descriptionTextView = UITextView()
+    var selectNote: Notes? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
         setUpConstraint()
         configureTextView()
-        saveNote()
+        curdOperation()
+        setdetail()
         
     }
     
@@ -28,11 +29,10 @@ class NoteDetailViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
-    let titleTextField: UITextField = {
+    var titleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = .white
+        textField.backgroundColor = .cyan
         textField.placeholder = "Type title here"
         return textField
     }()
@@ -42,10 +42,16 @@ class NoteDetailViewController: UIViewController {
         desLabel.translatesAutoresizingMaskIntoConstraints = false
         desLabel.numberOfLines = 0
         desLabel.text = "Description"
-       
         desLabel.textAlignment = .center
         return desLabel
     }()
+    
+    func setdetail(){
+        if selectNote != nil{
+            titleTextField.text = selectNote?.title
+            descriptionTextView.text = selectNote?.desc
+        }
+    }
     
     
     func setUpConstraint() {
@@ -70,11 +76,10 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-    
     func configureTextView()  {
         
         descriptionTextView.frame = CGRect(x: 20, y: 100, width: 200, height: 200)
-        descriptionTextView.backgroundColor = .white
+        descriptionTextView.backgroundColor = .cyan
         
         view.addSubview(descriptionTextView)
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,9 +90,18 @@ class NoteDetailViewController: UIViewController {
         descriptionTextView.widthAnchor.constraint(equalToConstant: 450).isActive = true
         
     }
-    func saveNote(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(addNote))
+    func curdOperation(){
+      let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(addNote))
+       let deleteButton = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deleteNote))
+        navigationItem.rightBarButtonItems = [saveButton, deleteButton]
     }
+   
+    @objc func deleteNote(){
+        print("delete note")
+        NoteService.connection.deleteNote(id: (selectNote?.id)!)
+               self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc
     func addNote() {
         print("saving")

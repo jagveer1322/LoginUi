@@ -48,8 +48,6 @@ class ContainerController: UIViewController {
             view.insertSubview(menuController.view, at: 0)
             addChild(menuController)
             menuController.didMove(toParent: self)
-            print("configure home controller")
-            
         }
         
     }
@@ -103,12 +101,10 @@ class ContainerController: UIViewController {
                        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginTableViewController") as? LoginTableViewController{
                            print("hello")
+                          openAlert(title: "Alert", message: "Successfully Sign Out ", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{_ in }])
                            sd.window!.rootViewController = UINavigationController(rootViewController: loginVC)
                        }
-                      
                    }
-
-                   
                }
                catch let signOutError as NSError {
                    print("Error signing out: %@", signOutError)
@@ -121,7 +117,6 @@ extension ContainerController: HomeControllerDelegate {
         if !isExpanded {
             configureMenuController()
         }
-        
         isExpanded = !isExpanded
         showMenuController(shouldExpand: isExpanded, menuOption: menuOption)
     }

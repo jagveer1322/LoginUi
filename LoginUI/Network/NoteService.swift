@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class NoteService{
+    
     static let connection = NoteService()
     
     func createNote(title: String, describe: String){
@@ -21,10 +22,14 @@ class NoteService{
             
             doc.setData(["id": doc.documentID, "title": title, "desc": describe, "createdAt": Timestamp(date: Date())]) { err in
                 
-                
+                if err != nil {
+                    print("print error")
+                    return
+                }
             }
         }
     }
+    
     func fetchNote(completion: @escaping ([Notes]) -> Void){
         guard let user = Auth.auth().currentUser else {return}
         let db = Firestore.firestore()
@@ -44,5 +49,14 @@ class NoteService{
             completion(notes)
         }
     }
+    func deleteNote(id: String){
+           if let user = Auth.auth().currentUser {
+               let db = Firestore.firestore()
+               let doc =  db.collection("users").document(user.uid).collection("Notes").document(id)
+               doc.delete()
+           
+       }
+           
+       }
 }
 

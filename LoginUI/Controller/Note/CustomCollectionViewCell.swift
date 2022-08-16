@@ -14,7 +14,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     let titlelabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .systemMint
+        label.backgroundColor = .cyan
         label.text = "hello"
         return label
     }()
@@ -26,13 +26,18 @@ class CustomCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    public func configure(titleLabel: String, descLabel: String ){
+        titlelabel.text = titleLabel
+       desc.text = descLabel
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(titlelabel)
         contentView.addSubview(desc)
         contentView.layer.cornerRadius = 15
-        contentView.layer.borderWidth = 3
+        contentView.layer.borderWidth = 2
     }
     
     required init?(coder: NSCoder) {
@@ -41,24 +46,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        titlelabel.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width-10, height: contentView.frame.size.height-30)
-
-       desc.frame = CGRect(x: 5, y: contentView.frame.size.height-50, width: contentView.frame.size.width-10, height: 50)
-        
-
+        titlelabel.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width-10, height: 50)
+        desc.frame = CGRect(x: 5, y: 50, width: contentView.frame.size.width-10, height: contentView.frame.height - 50)
     }
     
-    public func configure(titleLabel: String, descLabel: String ){
-        titlelabel.text = titleLabel
-       desc.text = descLabel
-        
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titlelabel.text = nil
-        desc.text = nil
-    }
     
 }

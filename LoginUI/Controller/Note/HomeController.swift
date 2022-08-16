@@ -7,11 +7,11 @@
 import UIKit
 
 class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionViewDataSource {
+    
     var note : [Notes] = []
+    var isListView = false
     var delegate: HomeControllerDelegate?
     var collectionView : UICollectionView!
-//    let label = UILabel()
-//    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,36 +25,40 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         collectionView.backgroundColor = .white
         collectionView.frame = view.bounds
         configureNavigationBar()
-        
-    }
+            }
+    
     @objc func handleMenuToggle() {
          delegate?.handleMenuToggle(forMenuOption: nil)
-        
     }
+    
     @objc func addNotes(){
            let notevc = NoteDetailViewController()
            navigationController.self?.pushViewController(notevc, animated: true)
        }
-//    func configureLabel(){
-//        view.addSubview(label)
-//        label.backgroundColor = .white
-//        label.text = "empty notes"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            label.heightAnchor.constraint(equalToConstant: 30),
-//            label.widthAnchor.constraint(equalToConstant: 120),
-//            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
-//    }
+    
+    @objc func viewSwitch(){
+//
+//        if isListView{
+//        toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
+//            isListView = false
+//        }
+//        else{
+//            toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
+//            isListView = true
+//        }
+//        navigationItem.rightBarButtonItems[toggleButton, addbutton]
+    }
+    
     func configureNavigationBar() {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Apple Keep"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu-3"), style: .plain, target: self, action: #selector(handleMenuToggle))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNotes))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu (2)"), style: .plain, target: self, action: #selector(handleMenuToggle))
+        let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNotes))
+        let toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
+        navigationItem.rightBarButtonItems = [addButton,toggleButton]
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,14 +70,25 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         cell.configure(titleLabel: note[indexPath.row].title!, descLabel: note[indexPath.row].desc!)
         return cell
     }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
         return CGSize(width: (width - 15)/2, height: (width - 15)/2)
     }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("tapped on cell")
+
+                 let selectNote = note[indexPath.row]
+                let noteDetail = NoteDetailViewController()
+                noteDetail.selectNote = selectNote
+//                let editVC = NoteDetailViewController()
+//
+//                let selectedNote: Notes!
+//                selectedNote = note[indexPath.row]
+//                editVC.selectNote = selectedNote
+                self.navigationController?.pushViewController(noteDetail, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         getNotes()
     }
@@ -89,7 +104,7 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
 extension HomeController: UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

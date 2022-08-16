@@ -15,7 +15,7 @@ enum MenuOption: Int, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .AppleKeep: return "Apple Keep"
+        case .AppleKeep: return ""
         case .Profile: return "Profile"
         case .Notes: return "Notes"
         case .Settings: return "Settings"

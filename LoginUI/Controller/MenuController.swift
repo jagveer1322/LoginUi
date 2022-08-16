@@ -14,7 +14,7 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = .white
         configureTableView()
         
     }
@@ -27,7 +27,7 @@ class MenuController: UIViewController {
         view.addSubview(tableView)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 80
+        tableView.rowHeight = 60
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
