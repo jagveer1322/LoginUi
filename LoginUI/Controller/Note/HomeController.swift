@@ -10,6 +10,8 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
     
     var note : [Notes] = []
     var isListView = false
+    var toggleButton : UIBarButtonItem!
+    var addButton : UIBarButtonItem!
     var delegate: HomeControllerDelegate?
     var collectionView : UICollectionView!
     
@@ -37,16 +39,18 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
        }
     
     @objc func viewSwitch(){
-//
-//        if isListView{
-//        toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
-//            isListView = false
-//        }
-//        else{
-//            toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
-//            isListView = true
-//        }
-//        navigationItem.rightBarButtonItems[toggleButton, addbutton]
+
+        if isListView{
+        toggleButton = UIBarButtonItem(image: UIImage(named: "grid (1)"), style: .plain, target: self, action: #selector(viewSwitch))
+            isListView = false
+        }
+        else{
+            toggleButton = UIBarButtonItem(image: UIImage(named: "grid"), style: .plain, target: self, action: #selector(viewSwitch))
+            isListView = true
+        }
+        navigationItem.rightBarButtonItems = [addButton,toggleButton]
+        self.collectionView?.reloadData()
+            
     }
     
     func configureNavigationBar() {
@@ -56,8 +60,8 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Apple Keep"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu (2)"), style: .plain, target: self, action: #selector(handleMenuToggle))
-        let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNotes))
-        let toggleButton = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: #selector(viewSwitch))
+         addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNotes))
+         toggleButton = UIBarButtonItem(image: UIImage(named: "grid"), style: .plain, target: self, action: #selector(viewSwitch))
         navigationItem.rightBarButtonItems = [addButton,toggleButton]
     }
     
@@ -73,7 +77,12 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
-        return CGSize(width: (width - 15)/2, height: (width - 15)/2)
+        if isListView {
+                    return CGSize(width: width, height: 120)
+        }else {
+                    return CGSize(width: (width - 15)/2, height: (width - 15)/2)
+                }
+            
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("tapped on cell")

@@ -229,13 +229,13 @@
 		FAF1BB262894CE1A0073D443 /* LoginUI */ = {
 			isa = PBXGroup;
 			children = (
-				FA5A098028A807AF00294B8A /* Network */,
 				FA734DBE2897E75E0023449F /* Controller */,
+				FAB1443E289B632800397758 /* View */,
 				FA02D4ED289E032F00DE6B8E /* Model */,
+				FA5A098028A807AF00294B8A /* Network */,
 				FA734DB928977A970023449F /* Utilitites */,
 				FAF1BB272894CE1A0073D443 /* AppDelegate.swift */,
 				FAF1BB292894CE1A0073D443 /* SceneDelegate.swift */,
-				FAB1443E289B632800397758 /* View */,
 				FAF1BB302894CE1E0073D443 /* Assets.xcassets */,
 				FAC38922289A6DDB0077F7B0 /* GoogleService-Info.plist */,
 				FAF1BB352894CE1E0073D443 /* Info.plist */,
