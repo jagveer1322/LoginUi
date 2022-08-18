@@ -16,7 +16,7 @@ class ContainerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        view.backgroundColor = .white
+        view.backgroundColor = .systemMint
         configureHomeController()
     }
 

@@ -14,6 +14,7 @@ class NoteDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setUpConstraint()
         configureTextView()
         curdOperation()
@@ -110,10 +111,15 @@ class NoteDetailViewController: UIViewController {
             else {
                 return
             }
+            if selectNote == nil{
             NoteService.connection.createNote(title: noteTitle, describe: noteDesc)
-                                    self.navigationController?.popViewController(animated: true)
-                        
             }
+            else{
+                NoteService.connection.updateNote(id: (selectNote?.id)!, title: noteTitle, desc: noteDesc)
+            }
+            self.navigationController?.popViewController(animated: true)
+            }
+       
         else {
                 openAlert(title: "Alert", message: "Please enter details", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in  }])
         }

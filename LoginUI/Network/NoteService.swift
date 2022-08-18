@@ -58,5 +58,12 @@ class NoteService{
        }
            
        }
+    func updateNote(id: String, title: String, desc: String){
+        if let user = Auth.auth().currentUser{
+            let db = Firestore.firestore()
+            let doc = db.collection("users").document(user.uid).collection("Notes").document(id)
+            doc.updateData(["title": title, "desc": desc])
+        }
+    }
 }
 

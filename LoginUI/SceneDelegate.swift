@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     if Auth.auth().currentUser == nil {
                         window.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginTableViewController")
                     } else {
-                        let homeDashboard = ContainerController()
+                    let homeDashboard = ContainerController()
+                        
                         let homeNavigationViewController = UINavigationController.init(rootViewController: homeDashboard)
                         window.rootViewController = homeNavigationViewController
                     }
