@@ -6,9 +6,11 @@
 //
 
 import Foundation
+
 struct Notes {
     
-    var id: String?
+    var id: String? 
     var title: String?
     var desc: String?
+    var archive: Bool?
 }

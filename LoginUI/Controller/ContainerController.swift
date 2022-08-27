@@ -81,8 +81,15 @@ class ContainerController: UIViewController {
             print("apple")
         case .Profile:
             print("profile")
-        case .Notes:
-            print("Notes")
+        case .Reminders:
+            print("Remainders")
+            let vc = ViewDatePicker()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case.Archive:
+            print("archive")
+            let archiveVC = ArchiveViewController()
+            navigationController?.pushViewController(archiveVC, animated: true)
+           
         case .Settings:
             print("settings")
         case .SignOut:

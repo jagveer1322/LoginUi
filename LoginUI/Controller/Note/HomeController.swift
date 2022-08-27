@@ -16,6 +16,10 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
     let searchController = UISearchController(searchResultsController: nil)
     var delegate: HomeControllerDelegate?
     var collectionView : UICollectionView!
+//    var limit = 5
+//    var totalNotes = 0
+//    var index = 0
+//    var displayNotes:[Notes] = Array()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,7 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         guard let collectionView = collectionView else {
             return
         }
@@ -35,16 +40,28 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         view.addSubview(collectionView)
         configureNavigationBar()
         searchBarSetup()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getNotes()
+        
     }
     
     func getNotes(){
         NoteService.connection.fetchNote { notes in
-            self.note = notes
-            self.collectionView.reloadData()
+        self.note = notes
+           print("====\(self.note.count)")
+//            self.totalNotes = self.note.count
+//            print("-------\(self.totalNotes)")
+//            while self.index < self.limit
+//            {
+//                print(" inside while")
+//                self.displayNotes.append(self.note[self.index])
+//                self.index = self.index + 1
+//            }
+        self.collectionView.reloadData()    
         }
     }
     
@@ -83,7 +100,7 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.hidesBarsOnSwipe = true
-        navigationItem.title = "Apple Keep"
+        navigationItem.title = "Keep Notes"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu (2)"), style: .plain, target: self, action: #selector(handleMenuToggle))
         addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNotes))
         toggleButton = UIBarButtonItem(image: UIImage(named: "grid"), style: .plain, target: self, action: #selector(viewSwitch))
@@ -107,23 +124,43 @@ class HomeController : UIViewController ,UICollectionViewDelegate, UICollectionV
         if isListView {
             return CGSize(width: width, height: 120)
         }else {
-            return CGSize(width: (width - 100)/2, height: (width - 15)/2)
+            return CGSize(width: (width - 15)/2, height: (width - 15)/2)
         }
         
     }
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        print("tapped on cell")
-//        let editVC = NoteDetailViewController()
-//        editVC.selectNote = note[indexPath.row]
-//        self.navigationController?.pushViewController(editVC, animated: true)
-//    }
+    
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tap on cell")
         let vc = NoteDetailViewController()
         vc.selectNote = note[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print("will display" )
+//        if indexPath.row == displayNotes.count - 1
+//        {
+//            print("enter in if")
+//            var index = displayNotes.count  - 1
+//            if index + 5 > displayNotes.count - 1
+//            {
+//                limit = note.count - index
+//            }
+//            else
+//            {
+//                limit = index + 10
+//            }
+//            while index < limit
+//            {
+//                displayNotes.append(note[index])
+//                index = index + 1
+//             }
+//            self.perform(#selector(loadCollectionView), with: nil, afterDelay: 2)
+//        }
+//    }
+//    @objc func loadCollectionView() {
+//        self.collectionView.reloadData()
+//        print("load collection view")
+//    }
   
 }
 
@@ -148,6 +185,7 @@ extension HomeController: UISearchResultsUpdating{
         guard let searchText = searchController.searchBar.text else{ return }
         if searchText == ""{
             print("empty search")
+            print(note)
             NoteService.connection.fetchNote { note in
             self.note = note
             self.collectionView?.reloadData()

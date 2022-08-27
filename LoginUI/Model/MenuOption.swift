@@ -9,7 +9,8 @@ import UIKit
 enum MenuOption: Int, CustomStringConvertible {
     case AppleKeep
     case Profile
-    case Notes
+    case Reminders
+    case Archive
     case Settings
     case SignOut
     
@@ -17,7 +18,8 @@ enum MenuOption: Int, CustomStringConvertible {
         switch self {
         case .AppleKeep: return ""
         case .Profile: return "Profile"
-        case .Notes: return "Notes"
+        case .Reminders: return "Reminders"
+        case.Archive: return "Archive"
         case .Settings: return "Settings"
         case .SignOut: return "Sign out"
         }
@@ -27,8 +29,10 @@ enum MenuOption: Int, CustomStringConvertible {
         switch self {
         case .Profile:
             return UIImage(named: "profile") ?? UIImage()
-        case .Notes:
-            return UIImage(named: "notes") ?? UIImage()
+        case .Reminders:
+            return UIImage(named: "bell") ?? UIImage()
+        case.Archive:
+            return UIImage(named: "archive") ?? UIImage()
         case .Settings:
             return UIImage(named: "settings") ?? UIImage()
         case .SignOut:

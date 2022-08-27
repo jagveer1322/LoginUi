@@ -39,7 +39,7 @@ class MenuController: UIViewController {
 
 extension MenuController: UITableViewDelegate, UITableViewDataSource{
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,6 +51,7 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let menuOption = MenuOption(rawValue: indexPath.row)
+       
         delegate?.handleMenuToggle(forMenuOption: menuOption)
         }
     
